@@ -11,7 +11,7 @@ ini_set('log_errors', 1);
 try {
     require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
-    DB::init();
+    DB::init(DB::DB_POSGRES, 'localhost', 'postgres', 'postgres', '', DB::CHARSET_NULL);
 
     $url = explode('/', $_SERVER['REQUEST_URI']);
 
@@ -39,5 +39,6 @@ try {
             break;
     }
 } catch (Exception $e) {
+    echo $e->getMessage();
     require_once 'pages/empty/index.php';
 }

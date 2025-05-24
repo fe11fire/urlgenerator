@@ -2,7 +2,7 @@
 
 use Api\Root\DB;
 
-$urls = DB::query('SELECT `short`, `url` FROM `urls` ORDER BY `date_create` DESC LIMIT 5', fetch: true);
+$urls = DB::query('SELECT short, url FROM urls ORDER BY date_create DESC LIMIT 5', fetch: true);
 
 
 ?>

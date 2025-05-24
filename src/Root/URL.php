@@ -10,7 +10,7 @@ class URL
 
     public static function test(string $url): bool
     {
-        $row = DB::query('SELECT `short` FROM `urls` WHERE `url` = ? LIMIT 1', [$url], true);
+        $row = DB::query('SELECT short FROM urls WHERE url = ? LIMIT 1', [$url], true);
 
         if (count($row) == 1) {
             self::$short = $row[0]['short'];
@@ -39,7 +39,7 @@ class URL
 
     public static function getURL($short): string
     {
-        $row = DB::query('SELECT `url` FROM `urls` WHERE `short` = ? LIMIT 1', [$short], true);
+        $row = DB::query('SELECT url FROM urls WHERE short = ? LIMIT 1', [$short], true);
 
         if (count($row) == 1) {
             return $row[0]['url'];
@@ -50,12 +50,12 @@ class URL
 
     private static function insertURL(string $url): string
     {
-        return DB::query('INSERT INTO `urls` (`url`) VALUES (?)', [$url], last_id: true);
+        return DB::query('INSERT INTO urls (url) VALUES (?)', [$url], last_id: true);
     }
 
     private static function updateURL(string $id): void
     {
-        DB::query('UPDATE `urls` SET `short` = ? WHERE `id` = ?', [self::$short, $id]);
+        DB::query('UPDATE urls SET short = ? WHERE id = ?', [self::$short, $id]);
     }
 
     private static function hashId(int $id): string
